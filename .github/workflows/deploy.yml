@@ -34,9 +34,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
-
       - name: Upload dist artifact
         uses: actions/upload-pages-artifact@v3
         with:
