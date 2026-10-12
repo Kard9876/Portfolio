@@ -647,22 +647,138 @@ export const CsgoMiniGame: React.FC<{ onClose?: () => void }> = ({ onClose }) =>
           ctx.lineWidth = 3;
 
           if (currentWeapon === 'ak47') {
-            ctx.beginPath();
-            ctx.moveTo(gunX, gunY + 60);
-            ctx.lineTo(gunX + 40, gunY);
-            ctx.lineTo(gunX - 50, gunY - 30);
-            ctx.lineTo(gunX - 70, gunY - 20);
-            ctx.closePath();
-            ctx.fill();
-            ctx.stroke();
+            ctx.save();
 
-            ctx.fillStyle = '#78350f';
-            ctx.fillRect(gunX - 40, gunY - 25, 45, 12);
-            ctx.fillStyle = '#27272a';
-            ctx.beginPath();
-            ctx.arc(gunX - 10, gunY + 15, 25, 0.4, 2.2);
-            ctx.lineWidth = 10;
-            ctx.stroke();
+          // --- POSITION & VIEWPORT TUNING ---
+          // Lift the gun upward so the entire magazine and grip sit above the canvas bottom
+          const viewX = gunX + 5;
+          const viewY = gunY - 15; // Raised ~95px higher than before
+          const scale = 0.88;       // Keeps the weapon crisp without crowding the play area
+
+          ctx.translate(viewX, viewY);
+          ctx.scale(scale, scale);
+          // Positive rotation tilts the barrel UPWARDS toward the crosshair in Canvas
+          ctx.rotate(0.20); 
+
+          // --- 1. REAR STOCK & PISTOL GRIP (Bottom / Right) ---
+          // Wood Stock
+          const stockGrad = ctx.createLinearGradient(0, 20, 70, 60);
+          stockGrad.addColorStop(0, '#854d0e'); // Warm oak / walnut
+          stockGrad.addColorStop(1, '#451a03');
+          ctx.fillStyle = stockGrad;
+          ctx.beginPath();
+          ctx.moveTo(25, 0);
+          ctx.lineTo(110, 4);
+          ctx.lineTo(100, 32);
+          ctx.lineTo(25, 16);
+          ctx.closePath();
+          ctx.fill();
+
+          // Pistol Grip (Bakelite / reddish-wood)
+          ctx.fillStyle = '#78350f';
+          ctx.beginPath();
+          ctx.moveTo(-10, 22);
+          ctx.lineTo(4, 68);
+          ctx.lineTo(-18, 76);
+          ctx.lineTo(-28, 22);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#27272a';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // --- 2. CURVED BANANA MAGAZINE (Fully visible inside the box) ---
+          ctx.save();
+          ctx.fillStyle = '#18181b';
+          ctx.beginPath();
+          ctx.moveTo(-45, 18);
+          ctx.bezierCurveTo(-55, 55, -88, 70, -108, 74);
+          ctx.lineTo(-118, 56);
+          ctx.bezierCurveTo(-92, 48, -70, 30, -58, 16);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = '#27272a';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+
+          // --- 3. MAIN STEEL RECEIVER (Dust cover + Bolt) ---
+          const metalGrad = ctx.createLinearGradient(0, -20, 0, 25);
+          metalGrad.addColorStop(0, '#3f3f46');
+          metalGrad.addColorStop(0.4, '#18181b');
+          metalGrad.addColorStop(1, '#09090b');
+          ctx.fillStyle = metalGrad;
+          ctx.fillRect(-70, -12, 95, 32);
+
+
+          // Steel bolt carrier & ejection port
+          ctx.fillStyle = '#a1a1aa'; // Polished steel bolt
+          ctx.fillRect(-35, -6, 28, 10);
+          ctx.fillStyle = '#27272a';
+          ctx.fillRect(-22, -10, 6, 6); // Charging handle
+
+          // Trigger guard
+          ctx.strokeStyle = '#27272a';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.arc(-20, 25, 9, Math.PI, 0, true);
+          ctx.stroke();
+
+          // --- 4. WOOD HANDGUARD (Lower + Upper) ---
+          const woodGrad = ctx.createLinearGradient(0, -18, 0, 18);
+          woodGrad.addColorStop(0, '#b45309'); // Amber varnished wood
+          woodGrad.addColorStop(0.5, '#92400e');
+          woodGrad.addColorStop(1, '#451a03');
+          ctx.fillStyle = woodGrad;
+
+          // Upper handguard
+          ctx.beginPath();
+          ctx.roundRect(-145, -15, 72, 14, 3);
+          ctx.fill();
+          ctx.strokeStyle = '#291305';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          // Lower handguard
+          ctx.beginPath();
+          ctx.roundRect(-150, 1, 78, 15, 4);
+          ctx.fill();
+          ctx.stroke();
+
+          // Handguard heat vents / slots
+          ctx.fillStyle = '#1c0a00';
+          for (let v = -135; v <= -85; v += 18) {
+            ctx.fillRect(v, -10, 9, 3);
+          }
+
+          // Metal barrel bands
+          ctx.fillStyle = '#27272a';
+          ctx.fillRect(-74, -16, 5, 33);
+          ctx.fillRect(-152, -15, 5, 30);
+
+          // --- 5. STEEL BARREL, GAS TUBE & MUZZLE ---
+          ctx.fillStyle = '#18181b';
+          // Gas tube
+          ctx.fillRect(-195, -12, 45, 9);
+          // Main barrel
+          ctx.fillRect(-225, -5, 75, 10);
+
+          // Front sight post (hooded pin)
+          ctx.fillStyle = '#27272a';
+          ctx.fillRect(-212, -26, 7, 22);
+          ctx.fillStyle = '#e4e4e7'; // Sight pin bead
+          ctx.fillRect(-210, -25, 3, 5);
+
+          // Slanted AKM muzzle brake
+          ctx.fillStyle = '#3f3f46';
+          ctx.beginPath();
+          ctx.moveTo(-225, -5);
+          ctx.lineTo(-236, -9);
+          ctx.lineTo(-236, 5);
+          ctx.lineTo(-225, 5);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.restore();
           } else if (currentWeapon === 'deagle') {
             ctx.fillStyle = '#71717a';
             ctx.fillRect(gunX - 30, gunY - 20, 70, 24);

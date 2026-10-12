@@ -42,13 +42,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenGame }) => {
           </a>
 
           {/* Shooting Range Trigger */}
-          <button
-            onClick={onOpenGame}
-            className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 cursor-pointer font-mono text-[11px]"
-          >
+          <a href="#cs-game" className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 cursor-pointer font-mono text-[11px]">
             <Crosshair className="w-3.5 h-3.5" />
             <span>Shooting Range</span>
-          </button>
+          </a>
         </nav>
 
         {/* Zone 3: 1 primary action */}

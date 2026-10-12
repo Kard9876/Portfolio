@@ -23,6 +23,18 @@ export default function App() {
         {/* Hero Section */}
         <Hero onOpenGame={() => setShowGameModal(true)} />
 
+        {/* Experience Section */}
+        <Experience />
+
+        {/* Education Section */}
+        <Education />
+
+        {/* Projects Section */}
+        <Projects />
+
+        {/* Skills Section */}
+        <Skills />
+
         {/* Bonus CS:GO Mini-Game Feature Section */}
         <section id="cs-game" className="py-16 border-b border-zinc-800/80 bg-zinc-950/40">
           <div className="max-w-6xl mx-auto px-6">
@@ -44,18 +56,6 @@ export default function App() {
             <CsgoMiniGame />
           </div>
         </section>
-
-        {/* Experience Section */}
-        <Experience />
-
-        {/* Education Section */}
-        <Education />
-
-        {/* Projects Section */}
-        <Projects />
-
-        {/* Skills Section */}
-        <Skills />
 
         {/* Contact Section */}
         <Contact />

@@ -15,16 +15,12 @@ export const Contact: React.FC = () => {
     <section id="contact" className="py-24 border-b border-zinc-800/80 bg-zinc-950/30">
       <div className="max-w-4xl mx-auto px-6 text-center">
         {/* Minimalist Section Header */}
-        <div className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3">
-          Get In Touch
-        </div>
-
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 text-balance">
-          Let&apos;s build something together.
+          Contact Me
         </h2>
 
         <p className="text-sm sm:text-base text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10">
-          I&apos;m currently open to new software engineering and machine learning opportunities. Whether you have a question, a project to collaborate on, or just want to connect, feel free to reach out.
+          I&apos;m currently open to new software engineering and machine learning opportunities. Whether you have a question, a project to collaborate on, or any other inquiries, feel free to reach out.
         </p>
 
         {/* Sleek Minimalist Email Interaction Card */}
